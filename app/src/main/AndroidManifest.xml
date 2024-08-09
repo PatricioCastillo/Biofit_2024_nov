@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Biofit"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".Nutrifit_IA"
+            android:exported="false" />
+        <activity
+            android:name=".medicamento_fosforo"
+            android:exported="false" />
+        <activity
+            android:name=".no_fosforo"
+            android:exported="false" />
+        <activity
+            android:name=".biblioteca_alimentos_chile"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_altInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_mediaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaPiernas.piernas_bajaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_altaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_mediaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_jueves"
+            android:exported="false"
+            android:theme="@style/Theme.Biofit" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaEspalda.espalda_bajaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_altInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_mediaInt_lunes"
+            android:exported="false"
+            android:theme="@style/Theme.Biofit" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaCardiovascular.cardio_bajaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_altaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_mediaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaBrazos.brazos_bajaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_altaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_mediaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_domingo"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_sabado"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_viernes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_jueves"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_miercoles"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_martes"
+            android:exported="false" />
+        <activity
+            android:name=".rutinaAbdomen.abdomen_bajaInt_lunes"
+            android:exported="false" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_domingo"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_sabado"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_viernes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_jueves"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_miercoles"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_martes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasHemoglobina.Listado_dieta_hemoglobina_lunes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_domingo"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_sabado"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_viernes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_jueves"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_miercoles"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_martes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasAltCalorias.Listado_dieta_altaCalorias_lunes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_domingo"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_sabado"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_viernes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_jueves"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_miercoles"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_martes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasMasaMuscular.Listado_dieta_altaMasaMusc_lunes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_domingo"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_sabado"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_viernes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_jueves"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_miercoles"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_martes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasFosforo.Listado_dieta_fosforo_lunes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_domingo"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_sabado"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_viernes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_jueves"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_miercoles"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_martes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="dietasPotasio.Listado_dieta_potasio_lunes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_domingo"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_sabado"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_viernes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_jueves"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_miercoles"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_martes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dietasCalorias.Listado_dieta_lunes"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BioDefinition"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Listado_alimentos"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Home_act"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

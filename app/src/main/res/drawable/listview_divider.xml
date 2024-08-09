@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Color del separador -->
+    <solid android:color="#B0B0B0"/>
+
+    <!-- Altura del separador -->
+    <size android:height="1dp"/>
+</shape>

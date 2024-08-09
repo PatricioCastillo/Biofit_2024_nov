@@ -1,0 +1,12 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Biofit" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/black</item> <!-- Cambia el color primario a negro -->
+        <item name="colorPrimaryDark">@color/black
+        </item> <!-- Cambia el color primario oscuro a negro -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Biofit" parent="Base.Theme.Biofit" />
+</resources>
