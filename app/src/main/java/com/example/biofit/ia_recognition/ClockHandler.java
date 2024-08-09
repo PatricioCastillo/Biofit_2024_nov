@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,41 +13,55 @@ import com.example.biofit.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class ClockHandler implements RecognitionListener {
 
     private Context context;
     private MediaPlayer mediaPlayer;
     private TextView tvRecognizedText;
+    private TextToSpeech textToSpeech;
 
     public ClockHandler(Context context, TextView tvRecognizedText) {
         this.context = context;
         this.tvRecognizedText = tvRecognizedText;
+
+        // Inicializa TextToSpeech
+        textToSpeech = new TextToSpeech(context, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int langResult = textToSpeech.setLanguage(new Locale("es", "ES"));
+                if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(context, "El idioma español no es soportado", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(context, "Error al inicializar TextToSpeech", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onReadyForSpeech(Bundle params) {
-        // Not used
+        // No usado
     }
 
     @Override
     public void onBeginningOfSpeech() {
-        // Not used
+        // No usado
     }
 
     @Override
     public void onRmsChanged(float rmsdB) {
-        // Not used
+        // No usado
     }
 
     @Override
     public void onBufferReceived(byte[] buffer) {
-        // Not used
+        // No usado
     }
 
     @Override
     public void onEndOfSpeech() {
-        // Not used
+        // No usado
     }
 
     @Override
@@ -54,34 +69,34 @@ public class ClockHandler implements RecognitionListener {
         String errorMessage;
         switch (error) {
             case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                errorMessage = "Network timeout";
+                errorMessage = "Tiempo de red agotado";
                 break;
             case SpeechRecognizer.ERROR_NETWORK:
-                errorMessage = "Network error";
+                errorMessage = "Error de red";
                 break;
             case SpeechRecognizer.ERROR_AUDIO:
-                errorMessage = "Audio error";
+                errorMessage = "Error de audio";
                 break;
             case SpeechRecognizer.ERROR_SERVER:
-                errorMessage = "Server error";
+                errorMessage = "Error del servidor";
                 break;
             case SpeechRecognizer.ERROR_CLIENT:
-                errorMessage = "Client error";
+                errorMessage = "Error del cliente";
                 break;
             case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                errorMessage = "Speech timeout";
+                errorMessage = "Tiempo de espera del discurso";
                 break;
             case SpeechRecognizer.ERROR_NO_MATCH:
-                errorMessage = "No match";
+                errorMessage = "No hay coincidencia";
                 break;
             case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                errorMessage = "Recognizer busy";
+                errorMessage = "Reconocedor ocupado";
                 break;
             case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                errorMessage = "Insufficient permissions";
+                errorMessage = "Permisos insuficientes";
                 break;
             default:
-                errorMessage = "Unknown error";
+                errorMessage = "Error desconocido";
                 break;
         }
         Toast.makeText(context, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
@@ -109,12 +124,12 @@ public class ClockHandler implements RecognitionListener {
 
     @Override
     public void onPartialResults(Bundle partialResults) {
-        // Not used
+        // No usado
     }
 
     @Override
     public void onEvent(int eventType, Bundle params) {
-        // Not used
+        // No usado
     }
 
     private boolean obtenerHora(String text) {
@@ -129,6 +144,9 @@ public class ClockHandler implements RecognitionListener {
             // Actualiza el TextView con la hora actual
             String currentTime = String.format("%02d:%02d", hour, minute);
             tvRecognizedText.setText(currentTime);
+
+            // Reproduce la hora actual por voz
+            textToSpeech.speak("La hora actual es " + currentTime, TextToSpeech.QUEUE_FLUSH, null, null);
 
             return true; // Devuelve verdadero si se pregunta la hora
         }

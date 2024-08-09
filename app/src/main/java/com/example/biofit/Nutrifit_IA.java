@@ -19,6 +19,7 @@ import com.example.biofit.ia_recognition.ClockHandler;
 import com.example.biofit.ia_recognition.MainHandler;
 import com.example.biofit.ia_recognition.MalwareHandler;
 import com.example.biofit.ia_recognition.MusicHandler;
+import com.example.biofit.ia_recognition.OfficeHandler;
 import com.example.biofit.ia_recognition.RenalHandler;
 import com.example.biofit.ia_recognition.ServerHandler;
 import com.example.biofit.ia_recognition.WebHandler;
@@ -39,7 +40,9 @@ public class Nutrifit_IA extends AppCompatActivity {
     private YugiOhHandler yugiOhHandler;
     private WebHandler webHandler;
     private MalwareHandler malwareHandler;
+    private OfficeHandler officeHandler;
     private TextView tvRecognizedText;
+
 
     private Handler handler;
     private Runnable timeCheckRunnable;
@@ -58,6 +61,7 @@ public class Nutrifit_IA extends AppCompatActivity {
         yugiOhHandler = new YugiOhHandler(this, tvRecognizedText);
         webHandler = new WebHandler(this, tvRecognizedText);
         malwareHandler = new MalwareHandler(this, tvRecognizedText);
+        officeHandler = new OfficeHandler(this, tvRecognizedText);
 
         // Verificar y solicitar permisos
         checkPermissions();
@@ -132,6 +136,7 @@ public class Nutrifit_IA extends AppCompatActivity {
                     yugiOhHandler.handleVoiceCommand(matches);
                     webHandler.handleVoiceCommand(matches);
                     malwareHandler.handleVoiceCommand(matches);
+                    officeHandler.handleVoiceCommand(matches);
                 } else {
                     Log.d("SpeechRecognition", "No se reconoció ningún texto.");
                 }

@@ -10,13 +10,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class WebHandler {
+public class OfficeHandler {
 
     private Context context;
     private Handler mainHandler;
     private TextView statusTextView;
 
-    public WebHandler(Context context, TextView statusTextView) {
+    public OfficeHandler(Context context, TextView statusTextView) {
         this.context = context;
         this.mainHandler = new Handler(Looper.getMainLooper());
         this.statusTextView = statusTextView;
@@ -53,12 +53,9 @@ public class WebHandler {
             String recognizedText = matches.get(0);
 
             // Comandos para el web
-            if (recognizedText.equalsIgnoreCase("abre biofit")) {
-                activatePython("http://192.168.100.26:5002/abre-biofit");
-            } else if (recognizedText.equalsIgnoreCase("abre github")) {
-                activatePython("http://192.168.100.26:5002/abre-github");
-            } else if (recognizedText.equalsIgnoreCase("abre google")) {
-                activatePython("http://192.168.100.26:5002/abre-google");
+            if (recognizedText.equalsIgnoreCase("presentar")) {
+                activatePython("http://192.168.100.26:5002/f5");
+
             }
         }
     }

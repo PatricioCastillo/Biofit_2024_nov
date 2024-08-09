@@ -39,11 +39,11 @@ public class ServerHandler {
 
             // Comandos Unity
             if (recognizedText.equalsIgnoreCase("activar servicio Unity")) {
-                sendRequest("http://192.168.100.23:5001/activate-unity", "POST");
+                sendRequest("http://192.168.100.26:5001/activate-unity", "POST");
             } else if (recognizedText.equalsIgnoreCase("activar desaparición")) {
-                sendRequest("http://192.168.100.23:5001/hide-object", "POST");
+                sendRequest("http://192.168.100.26:5001/hide-object", "POST");
             } else if (recognizedText.equalsIgnoreCase("activar aparición")) {
-                sendRequest("http://192.168.100.23:5001/show-object", "POST");
+                sendRequest("http://192.168.100.26:5001/show-object", "POST");
 
                 // Comandos Python
             } else if (recognizedText.equalsIgnoreCase("Reproducir Pelicula")) {
