@@ -54,11 +54,11 @@ public class WebHandler {
 
             // Comandos para el web
             if (recognizedText.equalsIgnoreCase("abre biofit")) {
-                activatePython("http://192.168.100.26:5002/abre-biofit");
+                activatePython("http://192.168.100.26:5006/abre-biofit");
             } else if (recognizedText.equalsIgnoreCase("abre github")) {
-                activatePython("http://192.168.100.26:5002/abre-github");
+                activatePython("http://192.168.100.26:5006/abre-github");
             } else if (recognizedText.equalsIgnoreCase("abre google")) {
-                activatePython("http://192.168.100.26:5002/abre-google");
+                activatePython("http://192.168.100.26:5006/abre-google");
             }
         }
     }

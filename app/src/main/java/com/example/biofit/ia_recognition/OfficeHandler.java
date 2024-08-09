@@ -24,7 +24,7 @@ public class OfficeHandler {
 
     public void handleVoiceCommand(ArrayList<String> matches) {
 
-        Web(matches);
+        officePowerPoint(matches);
     }
 
     private void activatePython(String urlString) {
@@ -48,14 +48,20 @@ public class OfficeHandler {
     }
 
 
-    public void Web(ArrayList<String> matches) {
+    public void officePowerPoint(ArrayList<String> matches) {
         if (matches != null && !matches.isEmpty()) {
             String recognizedText = matches.get(0);
 
             // Comandos para el web
             if (recognizedText.equalsIgnoreCase("presentar")) {
-                activatePython("http://192.168.100.26:5002/f5");
-
+                activatePython("http://192.168.100.26:5004/press-efecinco");
+            }else if (recognizedText.equalsIgnoreCase("siguiente")){
+                activatePython("http://192.168.100.26:5004/next");
+            }else if (recognizedText.equalsIgnoreCase("atrás")){
+                activatePython("http://192.168.100.26:5004/prev");
+            }
+            else if (recognizedText.equalsIgnoreCase("cerrar")){
+                activatePython("http://192.168.100.26:5004/altf");
             }
         }
     }
