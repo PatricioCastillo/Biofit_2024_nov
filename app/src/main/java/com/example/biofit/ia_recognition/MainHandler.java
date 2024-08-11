@@ -117,6 +117,7 @@ public class MainHandler implements RecognitionListener {
             playRandomAudio(R.raw.soydash, R.raw.yosoydash, R.raw.dash); // Example audio files
         }else if (noSe(recognizedText)) {
             playRandomAudio(R.raw.nose, R.raw.nolose, R.raw.nos); // Example audio files
+
         } else {
             Toast.makeText(context, "Comando no reconocido", Toast.LENGTH_SHORT).show();
         }
@@ -247,8 +248,6 @@ public class MainHandler implements RecognitionListener {
                 text.equalsIgnoreCase("qué funciones tienes");
     }
 
-
-    // Comando de Voz al decir no sé
     private boolean noSe(String text) {
         return text.equalsIgnoreCase("no sé") ||
                 text.equalsIgnoreCase("no estoy seguro de que hacer") ||

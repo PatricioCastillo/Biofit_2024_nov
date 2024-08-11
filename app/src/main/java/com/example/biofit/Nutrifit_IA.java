@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.biofit.ia_recognition.AccountHandler;
 import com.example.biofit.ia_recognition.ClockHandler;
 import com.example.biofit.ia_recognition.FileHandler;
 import com.example.biofit.ia_recognition.MainHandler;
@@ -43,6 +44,7 @@ public class Nutrifit_IA extends AppCompatActivity {
     private MalwareHandler malwareHandler;
     private OfficeHandler officeHandler;
     private FileHandler fileHandler;
+    private AccountHandler accountHandler;
     private TextView tvRecognizedText;
 
 
@@ -65,6 +67,7 @@ public class Nutrifit_IA extends AppCompatActivity {
         malwareHandler = new MalwareHandler(this, tvRecognizedText);
         officeHandler = new OfficeHandler(this, tvRecognizedText);
         fileHandler = new FileHandler(this, tvRecognizedText);
+        accountHandler = new AccountHandler(this, tvRecognizedText);
 
         // Verificar y solicitar permisos
         checkPermissions();
@@ -141,6 +144,7 @@ public class Nutrifit_IA extends AppCompatActivity {
                     malwareHandler.handleVoiceCommand(matches);
                     officeHandler.handleVoiceCommand(matches);
                     fileHandler.handleVoiceCommand(matches);
+                    accountHandler.handleCommand(recognizedText); // Llama a handleCommand con el texto reconocido
                 } else {
                     Log.d("SpeechRecognition", "No se reconoció ningún texto.");
                 }
