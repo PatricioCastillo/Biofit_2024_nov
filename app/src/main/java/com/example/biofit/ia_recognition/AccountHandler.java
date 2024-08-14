@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.biofit.R;
@@ -30,32 +29,41 @@ public class AccountHandler {
     private String categoria = "";
 
     private int step = 0; // Paso actual en el proceso de recolección de datos
+    private Handler pauseHandler; // Handler para manejar la pausa
+    private boolean isWaitingToRestart = false; // Bandera para controlar el reinicio del reconocimiento
 
     public AccountHandler(Context context, TextView statusTextView) {
         this.context = context;
         this.statusTextView = statusTextView;
         this.mainHandler = new Handler(Looper.getMainLooper());
+        this.pauseHandler = new Handler(Looper.getMainLooper()); // Inicializar el Handler para la pausa
     }
 
     public void handleCommand(String recognizedText) {
         if (recognizedText != null && !recognizedText.isEmpty()) {
-            // Verificar si el comando es para registrar cuenta
+            // Si digo registrar cuenta !
             if (registrar(recognizedText)) {
                 accesoUser = true;
+                playRandomAudio(R.raw.usuario, R.raw.senorusuario, R.raw.nombreusuario); // Example audio files
                 mainHandler.post(() -> statusTextView.setText("Diga el nombre de usuario"));
+                pauseRecognition();
                 return;
             }
 
             if (accesoUser) {
                 switch (step) {
                     case 0:
-                        // Solicitar nombre de usuario
+                        // Solicitar nombre de contraseña
+                        pauseRecognition();
+                        playRandomAudio(R.raw.contrasena, R.raw.contrsenados, R.raw.contrasenatres); // Example audio files
                         usuario = recognizedText;
                         mainHandler.post(() -> statusTextView.setText("Diga la contraseña"));
                         step++;
                         break;
                     case 1:
-                        // Solicitar contraseña
+                        // Solicitar categoría
+                        pauseRecognition();
+                        playRandomAudio(R.raw.servicio, R.raw.serviciodos, R.raw.serviciotres); // Example audio files
                         contrasena = recognizedText;
                         mainHandler.post(() -> statusTextView.setText("Diga la categoría"));
                         step++;
@@ -65,10 +73,12 @@ public class AccountHandler {
                         categoria = recognizedText;
                         sendRequest("http://192.168.100.26:5008/addUser");
                         step++;
+                        // reproducir audio "usario registrado!"
                         break;
                     case 3:
                         // Mensaje final y reiniciar el proceso
                         mainHandler.post(() -> statusTextView.setText("Datos ya enviados. Reinicie el proceso si es necesario."));
+                        playRandomAudio(R.raw.registrado, R.raw.registradodos, R.raw.registrotres);
                         reset();
                         break;
                     default:
@@ -76,7 +86,7 @@ public class AccountHandler {
                         break;
                 }
             } else {
-                mainHandler.post(() -> statusTextView.setText("Acceso no autorizado. Diga 'registrar cuenta' para comenzar."));
+                //mainHandler.post(() -> statusTextView.setText("Acceso no autorizado. Diga 'registrar cuenta' para comenzar."));
             }
         } else {
             mainHandler.post(() -> statusTextView.setText("Texto no reconocido. Asegúrate de decir correctamente el nombre, la contraseña y la categoría."));
@@ -144,5 +154,13 @@ public class AccountHandler {
     private boolean registrar(String text) {
         return text.equalsIgnoreCase("registrar cuenta") ||
                 text.equalsIgnoreCase("guardar cuenta");
+    }
+
+    private void pauseRecognition() {
+        isWaitingToRestart = true;
+        pauseHandler.postDelayed(() -> {
+            isWaitingToRestart = false;
+
+        }, 6000); // 5000 ms = 5 segundos
     }
 }

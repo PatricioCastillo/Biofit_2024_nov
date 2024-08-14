@@ -1,0 +1,52 @@
+{
+  "greetings": [
+    "Hola", "Hola hola", "buenos días", "hola dash", "hola dash cómo estás",
+    "buenos días dash", "qué tal", "hola cómo estás", "cómo estás", "cómo estás dash",
+    "hey dash", "hey dash qué cuentas", "saludos", "buenas", "buenas tardes",
+    "buenas noches", "hola a todos", "qué pasa", "que pasa dash", "qué hay", "qué tal dash",
+    "qué tal hoy", "hey", "hey qué tal", "hola qué tal", "hola qué hay",
+    "buenos días qué tal", "buenos días qué hay", "hola qué cuentas",
+    "cómo va todo", "todo bien", "cómo va"
+  ],
+  "responses": [
+    "bien gracias", "bien", "que bueno", "todo bien", "súper bien",
+    "estoy bien", "estoy muy bien", "estoy bien gracias", "estoy muy bien gracias",
+    "muy bien", "muy bien gracias", "gracias estoy bien", "gracias estoy muy bien",
+    "bien estoy", "muy bien estoy", "gracias bien", "gracias muy bien",
+    "muy bien gracias estoy"
+  ],
+  "questions": {
+    "whatCanDo": [
+      "qué puedes hacer", "qué puedes hacer por mí", "qué puedes hacer para mí",
+      "qué puedes hacer para ayudar", "qué haces", "qué sabes hacer",
+      "qué más sabes hacer", "qué puedes hacer hoy", "qué hay para hacer",
+      "qué puedes hacer aquí", "cuáles son tus funciones", "qué tareas puedes realizar",
+      "qué habilidades tienes", "qué puedes hacer en esta aplicación", "qué tareas puedes hacer",
+      "qué puedo hacer contigo", "cómo puedes ayudar", "qué tareas puedes llevar a cabo",
+      "cuál es tu propósito", "qué cosas puedes hacer", "qué tareas realizas"
+    ],
+    "whoAreYou": [
+      "quién eres", "quién eres tú", "cómo te llamas", "cómo te llamas tú",
+      "qué nombre tienes", "cómo te llamas", "quién está hablando",
+      "cuál es tu nombre", "quién es", "quién es este", "qué nombre tienes"
+    ],
+    "dontKnow": [
+      "no sé", "no lo sé", "no tengo idea", "no sé qué hacer",
+      "no sé qué decir", "no estoy seguro", "no tengo información",
+      "no tengo idea de eso", "no sé cómo ayudarte", "no sé lo que estás buscando",
+      "no sé qué necesitas", "no sé qué más decir"
+    ],
+    "youreDoing": [
+      "qué haces", "qué estas haciendo", "qué andas haciendo", "qué haces ahora",
+      "qué estás haciendo ahora", "qué haces ahorita", "qué estás haciendo ahorita",
+      "qué estás haciendo en este momento", "qué andas haciendo ahora", "qué haces en este momento",
+      "qué haces por ahí", "qué haces por acá", "qué haces por aquí", "qué andas haciendo por ahí",
+      "qué andas haciendo por aquí", "qué andas haciendo por acá", "qué estás haciendo por ahí",
+      "qué estás haciendo por acá", "qué estás haciendo por aquí", "qué es lo que estás haciendo",
+      "qué haces ahorita mismo", "qué estás haciendo ahorita mismo", "qué es lo que haces",
+      "qué estás haciendo justo ahora", "qué estás haciendo justo en este momento",
+      "qué andas haciendo ahorita"
+    ]
+
+  }
+}

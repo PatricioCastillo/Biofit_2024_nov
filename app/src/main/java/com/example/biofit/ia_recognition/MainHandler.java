@@ -1,15 +1,15 @@
 package com.example.biofit.ia_recognition;
-
 import android.content.Context;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.widget.Toast;
-
 import com.example.biofit.R;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,78 +18,71 @@ public class MainHandler implements RecognitionListener {
     private Context context;
     private MediaPlayer mediaPlayer;
     private Random random = new Random();
+    private SpeechRecognizer speechRecognizer;
+    private JSONObject responsesJson;
 
     public MainHandler(Context context) {
         this.context = context;
+        initializeSpeechRecognizer();
+        loadResponsesJson();
+    }
+
+    private void initializeSpeechRecognizer() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
+        speechRecognizer.setRecognitionListener(this);
+    }
+
+    private void loadResponsesJson() {
+        try {
+            InputStream inputStream = context.getAssets().open("mainResponses.json");
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+            String json = new String(buffer, "UTF-8");
+            responsesJson = new JSONObject(json);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("MainHandler", "Error al cargar el archivo JSON", e);
+            Toast.makeText(context, "Error al cargar el archivo JSON", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onReadyForSpeech(Bundle params) {
-        // Not used
+        // No action needed
     }
 
     @Override
     public void onBeginningOfSpeech() {
-        // Not used
+        // No action needed
     }
 
     @Override
     public void onRmsChanged(float rmsdB) {
-        // Not used
+        // No action needed
     }
 
     @Override
     public void onBufferReceived(byte[] buffer) {
-        // Not used
+        // No action needed
     }
 
     @Override
     public void onEndOfSpeech() {
-        // Not used
+        // No action needed
     }
 
     @Override
     public void onError(int error) {
-        String errorMessage;
-        switch (error) {
-            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                errorMessage = "Network timeout";
-                break;
-            case SpeechRecognizer.ERROR_NETWORK:
-                errorMessage = "Network error";
-                break;
-            case SpeechRecognizer.ERROR_AUDIO:
-                errorMessage = "Audio error";
-                break;
-            case SpeechRecognizer.ERROR_SERVER:
-                errorMessage = "Server error";
-                break;
-            case SpeechRecognizer.ERROR_CLIENT:
-                errorMessage = "Client error";
-                break;
-            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                errorMessage = "Speech timeout";
-                break;
-            case SpeechRecognizer.ERROR_NO_MATCH:
-                errorMessage = "No match";
-                break;
-            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                errorMessage = "Recognizer busy";
-                break;
-            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                errorMessage = "Insufficient permissions";
-                break;
-            default:
-                errorMessage = "Unknown error";
-                break;
-        }
+        String errorMessage = getErrorMessage(error);
         Toast.makeText(context, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onResults(Bundle results) {
         ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        if (matches != null) {
+        if (matches != null && !matches.isEmpty()) {
             String recognizedText = matches.get(0);
             handleCommand(recognizedText);
         }
@@ -97,184 +90,78 @@ public class MainHandler implements RecognitionListener {
 
     @Override
     public void onPartialResults(Bundle partialResults) {
-        // Not used
+        // No action needed
     }
 
     @Override
     public void onEvent(int eventType, Bundle params) {
-        // Not used
+        // No action needed
     }
 
-    public void handleCommand(String recognizedText) {
-        // Check and handle various commands
-        if (isGreetingCommand(recognizedText)) {
-            playRandomAudio(R.raw.buenosdias, R.raw.hola, R.raw.saludos); // Example audio files
-        } else if (estoyBien(recognizedText)) {
-            playRandomAudio(R.raw.mealegro, R.raw.bien, R.raw.superbien); // Example audio files
-        } else if (puedoHacer(recognizedText)) {
-            playRandomAudio(R.raw.puedohacer, R.raw.quehaceryo, R.raw.quehacer); // Example audio files
-        }else if (quienEres(recognizedText)) {
-            playRandomAudio(R.raw.soydash, R.raw.yosoydash, R.raw.dash); // Example audio files
-        }else if (noSe(recognizedText)) {
-            playRandomAudio(R.raw.nose, R.raw.nolose, R.raw.nos); // Example audio files
-
+    private void handleCommand(String recognizedText) {
+        if (isInList(recognizedText, "greetings")) {
+            playRandomAudio(R.raw.buenosdias, R.raw.hola, R.raw.saludos);
+        } else if (isInList(recognizedText, "responses")) {
+            playRandomAudio(R.raw.mealegro, R.raw.bien, R.raw.superbien);
+        } else if (isInList(recognizedText, "questions", "whatCanDo")) {
+            playRandomAudio(R.raw.puedohacer, R.raw.quehaceryo, R.raw.quehacer);
+        } else if (isInList(recognizedText, "questions", "whoAreYou")) {
+            playRandomAudio(R.raw.soydash, R.raw.yosoydash, R.raw.dash);
+        } else if (isInList(recognizedText, "questions", "dontKnow")) {
+            playRandomAudio(R.raw.nose, R.raw.nolose, R.raw.nos);
+        }else if (isInList(recognizedText, "questions", "youreDoing")) {
+            playRandomAudio(R.raw.nada, R.raw.broma, R.raw.estoyhaciendo);
         } else {
-            Toast.makeText(context, "Comando no reconocido", Toast.LENGTH_SHORT).show();
+            // Reproduce un audio de respuesta por defecto si lo deseas
+            // playRandomAudio(R.raw.losiento, R.raw.losientodos, R.raw.losientotres);
         }
     }
 
-    // Helper method to play a random audio from a list of resources
     private void playRandomAudio(int... audioResIds) {
         if (mediaPlayer != null) {
             mediaPlayer.release();
         }
         int randomIndex = random.nextInt(audioResIds.length);
         mediaPlayer = MediaPlayer.create(context, audioResIds[randomIndex]);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            // No es necesario reiniciar el reconocimiento de voz aquí
+        });
         mediaPlayer.start();
     }
 
-    private boolean isGreetingCommand(String text) {
-        return text.equalsIgnoreCase("Hola") ||
-                text.equalsIgnoreCase("Hola hola") ||
-                text.equalsIgnoreCase("buenos días") ||
-                text.equalsIgnoreCase("hola dash") ||
-                text.equalsIgnoreCase("hola dash cómo estás") ||
-                text.equalsIgnoreCase("buenos días dash") ||
-                text.equalsIgnoreCase("qué tal") ||
-                text.equalsIgnoreCase("hola cómo estás") ||
-                text.equalsIgnoreCase("cómo estás") ||
-                text.equalsIgnoreCase("cómo estás dash") ||
-                text.equalsIgnoreCase("hey dash") ||
-                text.equalsIgnoreCase("hey dash qué cuentas") ||
-                text.equalsIgnoreCase("saludos") ||
-                text.equalsIgnoreCase("buenas") ||
-                text.equalsIgnoreCase("buenas tardes") ||
-                text.equalsIgnoreCase("buenas noches") ||
-                text.equalsIgnoreCase("hola a todos") ||
-                text.equalsIgnoreCase("qué pasa") ||
-                text.equalsIgnoreCase("qué hay") ||
-                text.equalsIgnoreCase("qué tal dash") ||
-                text.equalsIgnoreCase("qué tal hoy") ||
-                text.equalsIgnoreCase("hey") ||
-                text.equalsIgnoreCase("hey qué tal") ||
-                text.equalsIgnoreCase("hola qué tal") ||
-                text.equalsIgnoreCase("hola qué hay") ||
-                text.equalsIgnoreCase("buenos días qué tal") ||
-                text.equalsIgnoreCase("buenos días qué hay") ||
-                text.equalsIgnoreCase("hola qué cuentas") ||
-                text.equalsIgnoreCase("cómo va todo") ||
-                text.equalsIgnoreCase("todo bien") ||
-                text.equalsIgnoreCase("cómo va");
-    }
-
-    private boolean estoyBien(String text) {
-        return text.equalsIgnoreCase("bien gracias") ||
-                text.equalsIgnoreCase("bien") ||
-                text.equalsIgnoreCase("que bueno") ||
-                text.equalsIgnoreCase("todo bien") ||
-                text.equalsIgnoreCase("súper bien") ||
-                text.equalsIgnoreCase("estoy bien") ||
-                text.equalsIgnoreCase("estoy muy bien") ||
-                text.equalsIgnoreCase("estoy bien gracias") ||
-                text.equalsIgnoreCase("estoy muy bien gracias") ||
-                text.equalsIgnoreCase("muy bien") ||
-                text.equalsIgnoreCase("muy bien gracias") ||
-                text.equalsIgnoreCase("gracias estoy bien") ||
-                text.equalsIgnoreCase("gracias estoy muy bien") ||
-                text.equalsIgnoreCase("bien estoy") ||
-                text.equalsIgnoreCase("muy bien estoy") ||
-                text.equalsIgnoreCase("gracias bien") ||
-                text.equalsIgnoreCase("gracias muy bien") ||
-                text.equalsIgnoreCase("muy bien gracias estoy");
-    }
-
-    private boolean puedoHacer(String text) {
-        return text.equalsIgnoreCase("qué puedes hacer") ||
-                text.equalsIgnoreCase("qué puedes hacer por mí") ||
-                text.equalsIgnoreCase("qué puedes hacer para mí") ||
-                text.equalsIgnoreCase("qué puedes hacer para ayudar") ||
-                text.equalsIgnoreCase("qué haces") ||
-                text.equalsIgnoreCase("qué sabes hacer") ||
-                text.equalsIgnoreCase("qué más sabes hacer") ||
-                text.equalsIgnoreCase("qué puedes hacer hoy") ||
-                text.equalsIgnoreCase("qué hay para hacer") ||
-                text.equalsIgnoreCase("qué puedes hacer aquí") ||
-                text.equalsIgnoreCase("cuáles son tus funciones") ||
-                text.equalsIgnoreCase("qué tareas puedes realizar") ||
-                text.equalsIgnoreCase("qué habilidades tienes") ||
-                text.equalsIgnoreCase("qué puedes hacer en esta aplicación") ||
-                text.equalsIgnoreCase("qué puedo hacer contigo") ||
-                text.equalsIgnoreCase("cómo puedes ayudar") ||
-                text.equalsIgnoreCase("qué tareas puedes llevar a cabo") ||
-                text.equalsIgnoreCase("cuál es tu propósito") ||
-                text.equalsIgnoreCase("qué capacidades tienes") ||
-                text.equalsIgnoreCase("cómo puedes asistirme") ||
-                text.equalsIgnoreCase("qué servicios ofreces") ||
-                text.equalsIgnoreCase("a ver nosé dime qué puedes hacer") ||
-                text.equalsIgnoreCase("a ver dime que puedes hacer") ||
-                text.equalsIgnoreCase("no sé a ver dime que puedes hacer") ||
-                text.equalsIgnoreCase("no sé dime que puedes hacer") ||
-                text.equalsIgnoreCase("qué opciones tengo contigo");
-    }
-
-    private boolean quienEres(String text) {
-        return text.equalsIgnoreCase("quién eres") ||
-                text.equalsIgnoreCase("qué eres tú") ||
-                text.equalsIgnoreCase("quién eres tú") ||
-                text.equalsIgnoreCase("qué eres") ||
-                text.equalsIgnoreCase("cómo te llamas") ||
-                text.equalsIgnoreCase("cuál es tu nombre") ||
-                text.equalsIgnoreCase("qué haces aquí") ||
-                text.equalsIgnoreCase("cuál es tu propósito") ||
-                text.equalsIgnoreCase("qué haces") ||
-                text.equalsIgnoreCase("por qué estás aquí") ||
-                text.equalsIgnoreCase("qué puedes hacer") ||
-                text.equalsIgnoreCase("para qué sirves") ||
-                text.equalsIgnoreCase("cuál es tu función") ||
-                text.equalsIgnoreCase("qué eres capaz de hacer") ||
-                text.equalsIgnoreCase("qué puedes hacer por mí") ||
-                text.equalsIgnoreCase("qué puedes hacer para ayudar") ||
-                text.equalsIgnoreCase("qué tareas puedes realizar") ||
-                text.equalsIgnoreCase("qué habilidades tienes") ||
-                text.equalsIgnoreCase("cómo puedes asistirme") ||
-                text.equalsIgnoreCase("qué servicios ofreces") ||
-                text.equalsIgnoreCase("qué opciones tengo contigo") ||
-                text.equalsIgnoreCase("qué puedes hacer en esta aplicación") ||
-                text.equalsIgnoreCase("cómo me puedes ayudar") ||
-                text.equalsIgnoreCase("qué puedes hacer aquí") ||
-                text.equalsIgnoreCase("qué tareas puedes llevar a cabo") ||
-                text.equalsIgnoreCase("cuál es tu propósito aquí") ||
-                text.equalsIgnoreCase("qué capacidades tienes") ||
-                text.equalsIgnoreCase("qué funciones tienes");
-    }
-
-    private boolean noSe(String text) {
-        return text.equalsIgnoreCase("no sé") ||
-                text.equalsIgnoreCase("no estoy seguro de que hacer") ||
-                text.equalsIgnoreCase("no tengo idea") ||
-                text.equalsIgnoreCase("no lo sé") ||
-                text.equalsIgnoreCase("no sé qué hacer") ||
-                text.equalsIgnoreCase("no sé qué hacer hoy") ||
-                text.equalsIgnoreCase("no sé qué") ||
-                text.equalsIgnoreCase("no sé no sé");
-    }
-
-
-
-
-    private void openApp(String packageName) {
-        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-        if (launchIntent != null) {
-            context.startActivity(launchIntent);
-        } else {
-            Toast.makeText(context, "Aplicación no encontrada", Toast.LENGTH_SHORT).show();
+    private String getErrorMessage(int error) {
+        switch (error) {
+            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT: return "Network timeout";
+            case SpeechRecognizer.ERROR_NETWORK: return "Network error";
+            case SpeechRecognizer.ERROR_AUDIO: return "Audio error";
+            case SpeechRecognizer.ERROR_SERVER: return "Server error";
+            case SpeechRecognizer.ERROR_CLIENT: return "Client error";
+            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT: return "Speech timeout";
+            case SpeechRecognizer.ERROR_NO_MATCH: return "No match";
+            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY: return "Recognizer busy";
+            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS: return "Insufficient permissions";
+            default: return "Unknown error";
         }
     }
 
-    public void releaseMediaPlayer() {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
+    private boolean isInList(String text, String arrayName) {
+        return isInList(text, arrayName, null);
+    }
+
+    private boolean isInList(String text, String arrayName, String subArrayName) {
+        try {
+            JSONArray array;
+            if (subArrayName != null) {
+                array = responsesJson.getJSONObject(arrayName).getJSONArray(subArrayName);
+            } else {
+                array = responsesJson.getJSONArray(arrayName);
+            }
+            for (int i = 0; i < array.length(); i++) {
+                if (text.equalsIgnoreCase(array.getString(i))) return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return false;
     }
 }

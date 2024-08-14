@@ -54,15 +54,36 @@
 
             <TextView
                 android:id="@+id/tvRecognizedText"
-                android:layout_width="302dp"
-                android:layout_height="136dp"
+                android:layout_width="291dp"
+                android:layout_height="20dp"
                 android:text="TextView"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintHorizontal_bias="0.511"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.24" />
+                app:layout_constraintVertical_bias="0.078" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animatedButton"
+                android:layout_width="261dp"
+                android:layout_height="197dp"
+                android:layout_centerInParent="true"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRecognizedText"
+                app:layout_constraintVertical_bias="0.0"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/bluebtn" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

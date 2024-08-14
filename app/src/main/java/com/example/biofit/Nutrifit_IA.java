@@ -1,10 +1,10 @@
 package com.example.biofit;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.biofit.ia_recognition.AccountHandler;
 import com.example.biofit.ia_recognition.ClockHandler;
 import com.example.biofit.ia_recognition.FileHandler;
@@ -28,12 +29,13 @@ import com.example.biofit.ia_recognition.WebHandler;
 import com.example.biofit.ia_recognition.YugiOhHandler;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Random;
 
 public class Nutrifit_IA extends AppCompatActivity {
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     private SpeechRecognizer speechRecognizer;
+    private boolean isListening = false; // Bandera para verificar el estado del reconocimiento de voz
     private ClockHandler clockHandler;
     private MainHandler mainHandler;
     private RenalHandler renalHandler;
@@ -46,10 +48,8 @@ public class Nutrifit_IA extends AppCompatActivity {
     private FileHandler fileHandler;
     private AccountHandler accountHandler;
     private TextView tvRecognizedText;
-
-
-    private Handler handler;
-    private Runnable timeCheckRunnable;
+    private MediaPlayer mediaPlayer;
+    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +72,16 @@ public class Nutrifit_IA extends AppCompatActivity {
         // Verificar y solicitar permisos
         checkPermissions();
 
-        // Configurar el Handler y el Runnable para verificar la hora
-        handler = new Handler();
-        timeCheckRunnable = new Runnable() {
-            @Override
-            public void run() {
-                checkTime();
-                handler.postDelayed(this, 60000); // Verificar cada minuto
-            }
-        };
-        handler.post(timeCheckRunnable);
+        LottieAnimationView animatedButton = findViewById(R.id.animatedButton);
 
-        // Iniciar el reconocimiento de voz continuo
-        startListening();
+        // Configurar el comportamiento de clic
+        animatedButton.setOnClickListener(v -> {
+            if (isListening) {
+                stopListening(); // Detener la escucha si ya está en curso
+            } else {
+                startListening(); // Iniciar la escucha si no está en curso
+            }
+        });
     }
 
     private void checkPermissions() {
@@ -99,7 +96,11 @@ public class Nutrifit_IA extends AppCompatActivity {
 
         if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startListening();
+                if (!isListening) {
+                    startListening();
+                } else {
+                    tvRecognizedText.setText("El reconocimiento de voz ya está en curso.");
+                }
             } else {
                 Toast.makeText(this, "Permiso para usar el micrófono denegado", Toast.LENGTH_SHORT).show();
             }
@@ -107,11 +108,10 @@ public class Nutrifit_IA extends AppCompatActivity {
     }
 
     private void startListening() {
-        if (speechRecognizer != null) {
-            speechRecognizer.destroy();
+        if (speechRecognizer == null) {
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            setupSpeechRecognizer();
         }
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        setupSpeechRecognizer();
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es-ES");
@@ -119,6 +119,16 @@ public class Nutrifit_IA extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
 
         speechRecognizer.startListening(intent);
+        isListening = true;
+        tvRecognizedText.setText("Reconocimiento de voz iniciado.");
+    }
+
+    private void stopListening() {
+        if (speechRecognizer != null && isListening) {
+            speechRecognizer.stopListening();
+            isListening = false;
+            tvRecognizedText.setText("Reconocimiento de voz detenido.");
+        }
     }
 
     private void setupSpeechRecognizer() {
@@ -128,9 +138,6 @@ public class Nutrifit_IA extends AppCompatActivity {
                 ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 if (matches != null && !matches.isEmpty()) {
                     String recognizedText = matches.get(0);
-
-                    // Mostrar el texto reconocido para depuración
-                    Log.d("SpeechRecognition", "Texto reconocido: " + recognizedText);
                     tvRecognizedText.setText(recognizedText);
 
                     // Implementando Inteligencia de Voz
@@ -144,66 +151,67 @@ public class Nutrifit_IA extends AppCompatActivity {
                     malwareHandler.handleVoiceCommand(matches);
                     officeHandler.handleVoiceCommand(matches);
                     fileHandler.handleVoiceCommand(matches);
-                    accountHandler.handleCommand(recognizedText); // Llama a handleCommand con el texto reconocido
+                    accountHandler.handleCommand(recognizedText);
                 } else {
-                    Log.d("SpeechRecognition", "No se reconoció ningún texto.");
+                    playRandomAudio(R.raw.losiento, R.raw.losientodos, R.raw.losientotres);
                 }
-                // Reiniciar la escucha después de procesar resultados
-                startListening();
+                isListening = false; // Marcar como no escuchando después de procesar los resultados
             }
 
             @Override
             public void onError(int error) {
-                Log.e("SpeechRecognition", "Error de reconocimiento: " + error);
-                // Reiniciar la escucha si ocurre un error
-                startListening();
+                // Manejo de errores
+                tvRecognizedText.setText("Error en el reconocimiento de voz.");
+                isListening = false; // Marcar como no escuchando en caso de error
             }
 
             @Override
             public void onReadyForSpeech(Bundle params) {
-                // No usado
+                // Manejar si es necesario
             }
 
             @Override
             public void onBeginningOfSpeech() {
-                // No usado
+                // Manejar si es necesario
             }
 
             @Override
             public void onRmsChanged(float rmsdB) {
-                // No usado
+                // Manejar si es necesario
             }
 
             @Override
             public void onBufferReceived(byte[] buffer) {
-                // No usado
+                // Manejar si es necesario
             }
 
             @Override
             public void onEndOfSpeech() {
-                // No usado
+                // Se maneja en onResults y onError
             }
 
             @Override
             public void onPartialResults(Bundle partialResults) {
-                // No usado
+                // Manejar si es necesario
             }
 
             @Override
             public void onEvent(int eventType, Bundle params) {
-                // No usado
+                // Manejar si es necesario
             }
         });
     }
 
-    private void checkTime() {
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-
-        if (hour == 19 && minute == 0) {
-            clockHandler.playAudio(R.raw.medicacion);
+    private void playRandomAudio(int... audioResIds) {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
         }
+        int randomIndex = random.nextInt(audioResIds.length);
+        mediaPlayer = MediaPlayer.create(this, audioResIds[randomIndex]);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            startListening(); // Reiniciar reconocimiento de voz después de reproducir audio
+        });
+        mediaPlayer.start();
     }
 
     @Override
@@ -212,7 +220,5 @@ public class Nutrifit_IA extends AppCompatActivity {
         if (speechRecognizer != null) {
             speechRecognizer.destroy();
         }
-        handler.removeCallbacks(timeCheckRunnable);
-        clockHandler.releaseMediaPlayer();
     }
 }
