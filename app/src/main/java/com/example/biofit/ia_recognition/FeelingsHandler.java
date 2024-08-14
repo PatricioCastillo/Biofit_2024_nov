@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.biofit.R;
 import org.json.JSONArray;
@@ -13,7 +14,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainHandler implements RecognitionListener {
+public class FeelingsHandler implements RecognitionListener {
 
     private Context context;
     private MediaPlayer mediaPlayer;
@@ -21,7 +22,7 @@ public class MainHandler implements RecognitionListener {
     private SpeechRecognizer speechRecognizer;
     private JSONObject responsesJson;
 
-    public MainHandler(Context context) {
+    public FeelingsHandler(Context context, TextView tvRecognizedText) {
         this.context = context;
         initializeSpeechRecognizer();
         loadResponsesJson();
@@ -34,7 +35,7 @@ public class MainHandler implements RecognitionListener {
 
     private void loadResponsesJson() {
         try {
-            InputStream inputStream = context.getAssets().open("mainResponses.json");
+            InputStream inputStream = context.getAssets().open("feelingsResponses.json");
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             inputStream.close();
@@ -98,22 +99,22 @@ public class MainHandler implements RecognitionListener {
         // No action needed
     }
 
-    private void handleCommand(String recognizedText) {
-        if (isInList(recognizedText, "greetings")) {
-            playRandomAudio(R.raw.buenosdias, R.raw.hola, R.raw.saludos);
-        } else if (isInList(recognizedText, "responses")) {
-            playRandomAudio(R.raw.mealegro, R.raw.bien, R.raw.superbien);
-        } else if (isInList(recognizedText, "questions", "whatCanDo")) {
-            playRandomAudio(R.raw.puedohacer, R.raw.quehaceryo, R.raw.quehacer);
-        } else if (isInList(recognizedText, "questions", "whoAreYou")) {
-            playRandomAudio(R.raw.soydash, R.raw.yosoydash, R.raw.dash);
-        } else if (isInList(recognizedText, "questions", "dontKnow")) {
-            playRandomAudio(R.raw.nose, R.raw.nolose, R.raw.nos);
-        }else if (isInList(recognizedText, "questions", "youreDoing")) {
-            playRandomAudio(R.raw.nada, R.raw.broma, R.raw.estoyhaciendo);
+    public void handleCommand(String recognizedText) {
+        if (isInList(recognizedText, "scared")) {
+            playRandomAudio(R.raw.miedouno, R.raw.miedodos, R.raw.miedotres);
+        } else if (isInList(recognizedText, "hungry")) {
+            playRandomAudio(R.raw.hambreuno, R.raw.hambredos, R.raw.hambretres);
+        } else if (isInList(recognizedText,  "angry")) {
+            playRandomAudio(R.raw.odiouno, R.raw.odiodos, R.raw.odiotres);
+        } else if (isInList(recognizedText, "happy")) {
+            playRandomAudio(R.raw.feliz, R.raw.felizdos, R.raw.feliztres);
+        } else if (isInList(recognizedText, "sad")) {
+            playRandomAudio(R.raw.saduno, R.raw.saddos, R.raw.sadtres);
+        }else if (isInList(recognizedText, "anxiety")) {
+            playRandomAudio(R.raw.anxuno, R.raw.aanxdos, R.raw.anxtres);
         } else {
             // Reproduce un audio de respuesta por defecto si lo deseas
-            //playRandomAudio(R.raw.losiento, R.raw.losientodos, R.raw.losientotres);
+            // playRandomAudio(R.raw.losiento, R.raw.losientodos, R.raw.losientotres);
         }
     }
 

@@ -9,11 +9,11 @@
     "cómo va todo", "todo bien", "cómo va"
   ],
   "responses": [
-    "bien gracias", "bien", "que bueno", "todo bien", "súper bien",
+    "bien gracias", "bien", "que bueno", "todo bien", "súper bien", "me siento bien",
     "estoy bien", "estoy muy bien", "estoy bien gracias", "estoy muy bien gracias",
     "muy bien", "muy bien gracias", "gracias estoy bien", "gracias estoy muy bien",
     "bien estoy", "muy bien estoy", "gracias bien", "gracias muy bien",
-    "muy bien gracias estoy"
+    "muy bien gracias estoy", "todo bien", "bastante bien"
   ],
   "questions": {
     "whatCanDo": [
@@ -37,7 +37,7 @@
       "no sé qué necesitas", "no sé qué más decir"
     ],
     "youreDoing": [
-      "qué haces", "qué estas haciendo", "qué andas haciendo", "qué haces ahora",
+      "qué haces", "qué estás haciendo", "qué andas haciendo", "qué haces ahora",
       "qué estás haciendo ahora", "qué haces ahorita", "qué estás haciendo ahorita",
       "qué estás haciendo en este momento", "qué andas haciendo ahora", "qué haces en este momento",
       "qué haces por ahí", "qué haces por acá", "qué haces por aquí", "qué andas haciendo por ahí",

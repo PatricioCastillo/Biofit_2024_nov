@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +17,12 @@ import androidx.core.content.ContextCompat;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.biofit.ia_recognition.AccountHandler;
 import com.example.biofit.ia_recognition.ClockHandler;
+import com.example.biofit.ia_recognition.FeelingsHandler;
 import com.example.biofit.ia_recognition.FileHandler;
 import com.example.biofit.ia_recognition.MainHandler;
 import com.example.biofit.ia_recognition.MalwareHandler;
 import com.example.biofit.ia_recognition.MusicHandler;
+import com.example.biofit.ia_recognition.NoMatch;
 import com.example.biofit.ia_recognition.OfficeHandler;
 import com.example.biofit.ia_recognition.RenalHandler;
 import com.example.biofit.ia_recognition.ServerHandler;
@@ -47,6 +48,7 @@ public class Nutrifit_IA extends AppCompatActivity {
     private OfficeHandler officeHandler;
     private FileHandler fileHandler;
     private AccountHandler accountHandler;
+    private FeelingsHandler feelingsHandler;
     private TextView tvRecognizedText;
     private MediaPlayer mediaPlayer;
     private Random random = new Random();
@@ -68,6 +70,7 @@ public class Nutrifit_IA extends AppCompatActivity {
         officeHandler = new OfficeHandler(this, tvRecognizedText);
         fileHandler = new FileHandler(this, tvRecognizedText);
         accountHandler = new AccountHandler(this, tvRecognizedText);
+        feelingsHandler = new FeelingsHandler(this, tvRecognizedText);
 
         // Verificar y solicitar permisos
         checkPermissions();
@@ -82,6 +85,7 @@ public class Nutrifit_IA extends AppCompatActivity {
                 startListening(); // Iniciar la escucha si no está en curso
             }
         });
+
     }
 
     private void checkPermissions() {
@@ -152,8 +156,14 @@ public class Nutrifit_IA extends AppCompatActivity {
                     officeHandler.handleVoiceCommand(matches);
                     fileHandler.handleVoiceCommand(matches);
                     accountHandler.handleCommand(recognizedText);
+                    feelingsHandler.handleCommand(recognizedText);
+
+                    // Crear y ejecutar NoMatch solo si el texto no está en la lista de comandos válidos
+                    NoMatch noMatchHandler = new NoMatch(getBaseContext());
+                    noMatchHandler.validateRecognition(recognizedText);
+
+
                 } else {
-                    playRandomAudio(R.raw.losiento, R.raw.losientodos, R.raw.losientotres);
                 }
                 isListening = false; // Marcar como no escuchando después de procesar los resultados
             }
@@ -221,4 +231,7 @@ public class Nutrifit_IA extends AppCompatActivity {
             speechRecognizer.destroy();
         }
     }
+
+
+
 }

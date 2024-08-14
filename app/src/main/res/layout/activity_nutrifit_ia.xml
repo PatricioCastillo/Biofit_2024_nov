@@ -56,7 +56,7 @@
                 android:id="@+id/tvRecognizedText"
                 android:layout_width="291dp"
                 android:layout_height="20dp"
-                android:text="TextView"
+                android:text="Diga una palabra ..."
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
