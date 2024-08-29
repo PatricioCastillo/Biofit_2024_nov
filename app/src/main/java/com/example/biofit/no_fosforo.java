@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +31,7 @@ public class no_fosforo extends AppCompatActivity {
     private ListView listView;
     private CustomListAdapter adapter;
     private ArrayList<DietaItem> datos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +121,7 @@ public class no_fosforo extends AppCompatActivity {
             // Configurar el TextView para el contenido
             TextView desc = listItem.findViewById(R.id.desc);
             desc.setText(currentItem.getContenido());
+
 
             // Configurar el ImageView
             ImageView imageView = listItem.findViewById(R.id.item_image);

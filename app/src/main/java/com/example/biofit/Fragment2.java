@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.biofit.dietasAltCalorias.Listado_dieta_altaCalorias_domingo;
 import com.example.biofit.dietasAltCalorias.Listado_dieta_altaCalorias_jueves;
 import com.example.biofit.dietasAltCalorias.Listado_dieta_altaCalorias_lunes;
@@ -93,7 +94,6 @@ public class Fragment2 extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_2, container, false);
 
-
         spinner = rootView.findViewById(R.id.spnMeta);
 
         // Datos del Spinner
@@ -159,6 +159,9 @@ public class Fragment2 extends Fragment {
         viewPager = rootView.findViewById(R.id.view_pager1);
         adapter = new SliderAdapter(requireContext());
         viewPager.setAdapter(adapter);
+
+
+
 
         // Configurar el desplazamiento automático del ViewPager
         final Handler handler = new Handler();
@@ -374,4 +377,6 @@ public class Fragment2 extends Fragment {
         Intent intent = new Intent(requireContext(), medicamento_fosforo.class);
         startActivity(intent);
     }
+
+
 }
