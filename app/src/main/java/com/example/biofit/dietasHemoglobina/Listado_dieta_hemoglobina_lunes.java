@@ -35,7 +35,7 @@ public class Listado_dieta_hemoglobina_lunes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_dieta_alta_calorias_lunes);
+        setContentView(R.layout.activity_listado_dieta_hemoglobina_lunes);
 
         listView = findViewById(R.id.listaMedi);
         datos = new ArrayList<>();

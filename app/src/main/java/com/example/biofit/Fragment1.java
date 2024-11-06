@@ -53,36 +53,6 @@ public class Fragment1 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_1, container, false);
 
-
-        //FullGauge peso_gauge = view.findViewById(R.id.peso);
-        //FullGauge calorias_gauge = view.findViewById(R.id.calorias);
-        //FullGauge adicional_gauge = view.findViewById(R.id.adicional);
-
-        float valor = 70.0f;
-        float valorFull = 100f;
-      //  peso_gauge.setValue(valor);
-      //  calorias_gauge.setValue(valor);
-       // adicional_gauge.setValue(valor);
-
-
-      //  peso_gauge.setGaugeBackGroundColor(Color.GREEN);
-        //   calorias_gauge.setGaugeBackGroundColor(Color.BLUE);
-        //  adicional_gauge.setGaugeBackGroundColor(Color.RED);
-
-        //   peso_gauge.setDisplayValuePoint(true);
-
-
-        //    peso_gauge.setValueColor(Color.GREEN);
-        //   //   calorias_gauge.setValueColor(Color.BLUE);
-        //    adicional_gauge.setValueColor(Color.RED);
-
-        // Cargar y mostrar el GIF animado en el ImageView
-       ImageView gifImageView = view.findViewById(R.id.gif);
-       Glide.with(this).asGif().load(R.drawable.line).into(gifImageView);
-
-   //   ImageView heartGif = view.findViewById(R.id.heartG)s;
-   //    Glide.with(this).asGif().load(R.drawable.heart).into(heartGif);
-
         return view;
     }
 

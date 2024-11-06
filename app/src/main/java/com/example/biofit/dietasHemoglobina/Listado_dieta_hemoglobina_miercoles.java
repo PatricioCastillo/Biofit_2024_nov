@@ -35,7 +35,7 @@ public class Listado_dieta_hemoglobina_miercoles extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_dieta_alta_calorias_miercoles);
+        setContentView(R.layout.activity_listado_dieta_hemoglobina_miercoles);
 
         listView = findViewById(R.id.listaMedi);
         datos = new ArrayList<>();

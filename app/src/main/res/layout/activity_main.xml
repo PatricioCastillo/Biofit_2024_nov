@@ -5,127 +5,268 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_black_background"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="374dp"
-        android:layout_height="713dp"
-        android:background="#FFFFFF"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/header_section"
+        android:layout_width="397dp"
+        android:layout_height="353dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#438560"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/footer_section"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
-
-
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="272dp"
-                android:layout_height="131dp"
-                android:layout_marginTop="60dp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logotipo" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="317dp"
-                android:layout_height="122dp"
-                android:layout_marginTop="24dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/logo">
-
-                <EditText
-                    android:id="@+id/editTextText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Ingrese Usuario"
-                    android:inputType="text"
-                    android:minHeight="48dp" />
-
-                <EditText
-                    android:id="@+id/editTextTextPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Ingrese Contraseña"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnEntrar"
-                android:layout_width="155dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/boton_redondeado"
-                android:backgroundTint="#3F51B5"
-                android:onClick="Iniciar"
-                android:text="Entrar"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <Button
-                android:id="@+id/btnSalir"
-                android:layout_width="154dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/boton_redondeado"
-                android:backgroundTint="#3F51B5"
-                android:onClick="VerListados"
-                android:text="Salir"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="383dp"
-                android:layout_height="40dp"
-                app:cardBackgroundColor="#000"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/cardView11"
+                android:layout_width="351dp"
+                android:layout_height="199dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnSalir"
-                app:layout_constraintVertical_bias="0.647" >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_width="167dp"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="36dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/txt" />
+
+                    <ImageView
+                        android:id="@+id/imageView21"
+                        android:layout_width="353dp"
+                        android:layout_height="189dp"
+                        android:layout_marginTop="44dp"
+                        android:layout_marginEnd="45dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView14"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.363"
+                        app:srcCompat="@drawable/main" />
+
                     <TextView
                         android:id="@+id/textView14"
+                        android:layout_width="191dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:text="Software de gestión renal y
+alimentación sana que controla
+parametros sanguíneos"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+                    <TextView
+                        android:id="@+id/textView30"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BioFit. Todos los derechos reservados 2024"
-                        android:textColor="@color/white"
+                        android:layout_marginEnd="16dp"
+                        android:text="Software Control Renal"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView14"
+                        app:layout_constraintVertical_bias="0.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="349dp"
+                android:layout_height="113dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView11">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ViewFlipper
+                        android:id="@+id/slider"
+                        android:layout_width="380dp"
+                        android:layout_height="118dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/footer_section"
+        android:layout_width="390dp"
+        android:layout_height="366dp"
+        android:layout_marginBottom="42dp"
+        android:backgroundTint="#51A251"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_section">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="371dp"
+                android:layout_height="319dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="101dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginBottom="24dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.446"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="42dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/google" />
+
+                        <ImageView
+                            android:id="@+id/imageView11"
+                            android:layout_width="41dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/facebook" />
+
+                        <ImageView
+                            android:id="@+id/imageView13"
+                            android:layout_width="44dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/instagram" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="322dp"
+                        android:layout_height="128dp"
+                        android:layout_marginTop="34dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <EditText
+                            android:id="@+id/editTextText"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:background="@drawable/username"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:text="" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/password"
+                            android:ems="10"
+                            android:inputType="textPassword" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="155dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="45dp"
+                        android:backgroundTint="#1B5910"
+                        android:onClick="Iniciar"
+                        android:text="Iniciar Sesión"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="408dp"
+                        android:layout_height="263dp"
+                        android:layout_marginTop="55dp"
+                        android:src="@drawable/wave_profile"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Footer"
+        android:layout_width="440dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/footer_txt"
+                android:layout_width="210dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginBottom="8dp"
+                android:text="Biofit 2024, Gestión Renal"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

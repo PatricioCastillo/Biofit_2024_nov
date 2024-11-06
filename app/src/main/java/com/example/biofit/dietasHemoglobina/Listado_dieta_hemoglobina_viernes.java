@@ -35,7 +35,7 @@ public class Listado_dieta_hemoglobina_viernes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_dieta_alta_calorias_viernes);
+        setContentView(R.layout.activity_listado_dieta_hemoglobina_viernes);
 
         listView = findViewById(R.id.listaMedi);
         datos = new ArrayList<>();

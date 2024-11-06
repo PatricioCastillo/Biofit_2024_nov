@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_black_background"
+    android:background="@drawable/background"
     tools:context=".Nutrifit_IA">
 
     <androidx.cardview.widget.CardView
@@ -13,6 +13,7 @@
         android:layout_width="342dp"
         android:layout_height="373dp"
         android:layout_marginTop="28dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,6 +42,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="340dp"
         android:layout_height="244dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"

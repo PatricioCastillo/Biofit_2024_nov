@@ -3,7 +3,6 @@ package com.example.biofit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.example.biofit.dietasAltCalorias.Listado_dieta_altaCalorias_domingo;
 import com.example.biofit.dietasAltCalorias.Listado_dieta_altaCalorias_jueves;
 import com.example.biofit.dietasAltCalorias.Listado_dieta_altaCalorias_lunes;
@@ -57,9 +55,7 @@ import com.example.biofit.dietasMasaMuscular.Listado_dieta_altaMasaMusc_sabado;
 import com.example.biofit.dietasMasaMuscular.Listado_dieta_altaMasaMusc_viernes;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
-import adapters.SliderAdapter;
 import dietasPotasio.Listado_dieta_potasio_domingo;
 import dietasPotasio.Listado_dieta_potasio_jueves;
 import dietasPotasio.Listado_dieta_potasio_lunes;
@@ -74,7 +70,6 @@ public class Fragment2 extends Fragment {
 
     //Variables para el Slider:
     private ViewPager viewPager;
-    private SliderAdapter adapter;
     private int currentPage = 0;
     private Timer timer;
     private final long DELAY_MS = 1000; // Tiempo de espera antes de que comience el desplazamiento automático
@@ -94,7 +89,7 @@ public class Fragment2 extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_2, container, false);
 
-        spinner = rootView.findViewById(R.id.spnMeta);
+        spinner = rootView.findViewById(R.id.spnEjercicio);
 
         // Datos del Spinner
         String[] items = {"Bajo en Calorias", "Bajo en Potasio", "Bajo en Fosforo", "Alto Masa Muscular", "Alto en Hemoglobina","Alto en Calorias", "Bajo en Sodio", "Desintoxicación"};
@@ -136,7 +131,7 @@ public class Fragment2 extends Fragment {
             }
         });
 
-        ImageButton imageButtons = rootView.findViewById(R.id.icon);
+        ImageButton imageButtons = rootView.findViewById(R.id.warning);
         imageButtons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,43 +148,6 @@ public class Fragment2 extends Fragment {
             }
         });
 
-
-
-        // Configurar el ViewPager y asignar el adaptador
-        viewPager = rootView.findViewById(R.id.view_pager1);
-        adapter = new SliderAdapter(requireContext());
-        viewPager.setAdapter(adapter);
-
-
-
-
-        // Configurar el desplazamiento automático del ViewPager
-        final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
-            public void run() {
-                if (currentPage >= adapter.getImageIds().length) {
-                    currentPage = 0; // Reiniciar a la primera imagen
-                }
-                viewPager.setCurrentItem(currentPage++, true);
-            }
-        };
-
-
-
-        timer = new Timer(); // Initialize Timer
-        timer.schedule(new TimerTask() { // Iniciar TimerTask
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        }, DELAY_MS, PERIOD_MS); // Ejecutar el desplazamiento automático después del tiempo de espera y repetir después de cada intervalo
-
-        // Define your Spinner
-        //       Spinner spinner = rootView.findViewById(R.id.spnMeta);
-        //         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(requireContext(),
-                //               R.array.goals, android.R.layout.simple_spinner_item);
-        //        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //      spinner.setAdapter(spinnerAdapter);
 
         // Recuperar la selección del Spinner desde SharedPreferences
         String dietaSeleccionada = obtenerDietaSeleccionada();

@@ -55,7 +55,7 @@ public class Home_act extends AppCompatActivity {
                     case 1:
                         return "Nutrición";
                     case 2:
-                        return "Fitness";
+                        return "Estadisticas";
                     case 3:
                         return "Biofit";
                     default:
